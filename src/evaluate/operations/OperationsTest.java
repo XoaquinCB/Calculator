@@ -1,9 +1,7 @@
-package math;
+package evaluate.operations;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class OperationsTest {
 
@@ -104,4 +102,5 @@ public class OperationsTest {
         op.divide(3);
         Assert.assertEquals(op.getTotal(), 1.75, 0);
     }
+
 }

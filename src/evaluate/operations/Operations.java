@@ -1,4 +1,4 @@
-package math;
+package evaluate.operations;
 
 /**
  * 1. Create when starting calculation

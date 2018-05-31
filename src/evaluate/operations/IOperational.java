@@ -1,4 +1,4 @@
-package math;
+package evaluate.operations;
 
 public interface IOperational {
 
