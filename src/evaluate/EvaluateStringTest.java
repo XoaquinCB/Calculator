@@ -25,6 +25,28 @@ public class EvaluateStringTest {
 	}
 
 	@Test
+	public void evaluateDecimal() {
+		double stringArray = es.evaluate("1.5*2");
+		Assert.assertEquals(stringArray, 3, 0);
+	}
+
+	@Test
+	public void replaceAnsInt() {
+		es.evaluate("1+2");
+		String ansString = es.replaceAns("Ans+2");
+		double result = es.evaluate(ansString);
+		Assert.assertEquals(result, 5, 0);
+	}
+
+	@Test
+	public void replaceAnsDecimal() {
+		es.evaluate("1.5+2");
+		String ansString = es.replaceAns("Ans+1.25");
+		double result = es.evaluate(ansString);
+		Assert.assertEquals(result, 4.75, 0);
+	}
+
+	@Test
 	public void formatStringSingleDigit() {
 		ArrayList<String> stringArray = es.formatString("1+2");
 		ArrayList<String> compareArray = new ArrayList<String>();

@@ -21,6 +21,9 @@ public class EvaluateString implements IEvaluable {
 		new OpSymbol("/", Operations.DIVIDE)
 	};
 
+	// Store the previous answer
+	private double ans = 0;
+
 	/**
 	 * Takes a string, formats it, computes the value and returns it
 	 *
@@ -28,10 +31,24 @@ public class EvaluateString implements IEvaluable {
 	 * @return The numerical result
 	 */
 	public double evaluate(String calcString) {
-		ArrayList<String> formattedString = formatString(calcString);
+		String removeAns = replaceAns(calcString);
+		ArrayList<String> formattedString = formatString(removeAns);
 		if (formattedString.size() == 0)
 			return 0;
-		return evaluateStringArray(formattedString);
+		double result = evaluateStringArray(formattedString);
+		ans = result;
+		return result;
+	}
+
+	/**
+	 * Takes a string and replaces the part "Ans" with the previous
+	 * answer stored
+	 *
+	 * @param string The string with the "Ans" variable in
+	 * @return A string with a numerical value instead of "Ans"
+	 */
+	public String replaceAns(String string) {
+		return string.replace("Ans", "" + ans);
 	}
 
 	/**
