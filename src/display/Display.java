@@ -15,7 +15,9 @@ import javafx.scene.text.Font;
 
 public class Display extends VBox {
 
-	private final ArrayList<Character> validCharacters = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '(', ')', '.'));
+	private final ArrayList<Character> validCharacters = new ArrayList<Character>(Arrays.asList(
+		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '(', ')', '.'
+	));
 
 	private HBox hBox1;
 	private HBox hBox2;
@@ -26,7 +28,6 @@ public class Display extends VBox {
 	public Display() {
 
 		inputField = new TextField();//initialise inputField
-		inputField.setStyle("-fx-background-color: #fff;");//remove border
 		setInputSize(20);//set font size
 		HBox.setHgrow(inputField, Priority.ALWAYS);//always resize to fit container
 
