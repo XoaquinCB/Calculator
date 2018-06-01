@@ -20,6 +20,7 @@ public class EvaluateString implements IEvaluable {
 
 	/**
 	 * Takes a string, formats it, computes the value and returns it
+	 *
 	 * @param calcString The string to evaluate
 	 * @return The numerical result
 	 */
@@ -30,6 +31,7 @@ public class EvaluateString implements IEvaluable {
 	/**
 	 * Takes a string and correctly formats it so that it can
 	 * be used with the evaluateStringArray() method
+	 *
 	 * @param calcString The string to format
 	 * @return A formatted string array
 	 */
@@ -40,6 +42,7 @@ public class EvaluateString implements IEvaluable {
 			for (int j = 0; j < opSymbols.length; j++) {
 				if (calcString.charAt(i) == opSymbols[j].symbol.charAt(0)) {
 					// TODO: 01/06/18 Format this string
+
 				}
 			}
 		}
