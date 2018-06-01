@@ -80,6 +80,27 @@ public class EvaluateString implements IEvaluable {
 	}
 
 	/**
+	 * Formats a string so that the brackets are removed and that
+	 * the terms are placed in order, removing the need for brackets
+	 *
+	 * @param stringWithBrackets The string that contains the brackets
+	 * @return A string that doesn't contain brackets
+	 */
+	public String removeBrackets(String stringWithBrackets) {
+		return "";
+	}
+
+	// TODO: 01/06/18 ALL OF THISSSSSS D:< 
+	
+	public String removeOnePairOfBrackets(String stringWithBrackets) {
+		return "";
+	}
+
+	public String removeMultipleBrackets(String stringWithBrackets) {
+		return "";
+	}
+
+	/**
 	 * Takes a formatted string array and performs the appropriate
 	 * calculations to return a result
 	 *
