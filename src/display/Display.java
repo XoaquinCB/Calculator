@@ -16,7 +16,6 @@ public class Display extends VBox {
 	
 	private final ArrayList<Character> validCharacters = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '(', ')'));
 	
-//	private VBox vBox;
 	private HBox hBox1;
 	private HBox hBox2;
 	private TextField inputField;
