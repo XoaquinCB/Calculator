@@ -2,6 +2,6 @@ package evaluate;
 
 public interface IEvaluable {
 
-    double evaluate(String a);
+	double evaluate(String a);
 
 }
