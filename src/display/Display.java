@@ -8,16 +8,15 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class Display {
+public class Display extends VBox {
 	
 	private final ArrayList<Character> validCharacters = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '(', ')'));
 	
-	private VBox vBox;
+//	private VBox vBox;
 	private HBox hBox1;
 	private HBox hBox2;
 	private TextField inputField;
@@ -53,25 +52,18 @@ public class Display {
 		
 		
 		// Arrange objects
-		vBox = new VBox();//initialise vBox
-		
 		hBox1 = new HBox();//initialise hBox1
 		hBox1.setPadding(new Insets(0, 10, 0, 10));//set padding
 		hBox1.setAlignment(Pos.BASELINE_LEFT);//set the alignment of inputField to the left
 		hBox1.getChildren().add(inputField);//add inputField to hBox1
-		vBox.getChildren().add(hBox1);//add hBox1 to vBox
+		this.getChildren().add(hBox1);//add hBox1 to VBox
 		
 		hBox2 = new HBox();//initialise hBox2
 	    hBox2.setPadding(new Insets(0, 10, 0, 0));//set padding
 	    hBox2.setAlignment(Pos.BASELINE_RIGHT);//set the alignment of inputField to the right
 	    hBox2.getChildren().add(answerLabel);//add inputField to hBox2
-	    vBox.getChildren().add(hBox2);//add hBox1 to vBox
+	    this.getChildren().add(hBox2);//add hBox1 to VBox
 	    
-	}
-	
-	// Add display to a layout
-	public void addToPane(Pane layout) {
-	    layout.getChildren().add(vBox);
 	}
 	
 	// Set font size of intput text

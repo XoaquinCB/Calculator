@@ -1,24 +1,27 @@
 package display;
 
+import input.InputButton;
 import javafx.scene.control.Button;
 import sample.Main;
 
 public class DisplayExample {
 	
+	public static Display display;
+	
 	public static void init() {
+		
+		display = new Display();
+		
 		// Buttons
-        Button button1 = new Button("1");
-        button1.setOnAction(e -> Main.display.addToInput("1"));//when button is pressed, add "1" to the input text
-        button1.setFocusTraversable(false);//set this on all buttons (except '=' button) so that the text input doesn't lose focus
-        
-        Button button2 = new Button("2");
-        button2.setOnAction(e -> Main.display.addToInput("2"));//when button is pressed, add "2" to the input text
-        button2.setFocusTraversable(false);//set this on all buttons (except '=' button) so that the text input doesn't lose focus
+		InputButton button_1 = new InputButton("1", display);
+		InputButton button_2 = new InputButton("2", display);
+		InputButton button_plus = new InputButton("+", display);
         
         Button equals = new Button("=");
-        equals.setOnAction(e -> Main.display.setAnswer(12556));//when button is pressed, set answer to 12556 (random number...)
+        equals.setOnAction(e -> display.setAnswer(12556));//when button is pressed, set answer to 12556 (random number...)
         
-        Main.layout.getChildren().addAll(button1, button2, equals);//add buttons to layout
+        Main.layout.getChildren().add(display);
+        Main.layout.getChildren().addAll(button_1, button_2, button_plus, equals);//add buttons to layout
 	}
 
 }
