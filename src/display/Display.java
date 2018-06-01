@@ -3,6 +3,7 @@ package display;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import evaluate.EvaluateString;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -89,8 +90,15 @@ public class Display extends VBox {
 	}
 	
 	// Set the answerLabel to a value
-	public void setAnswer(int answer) {
-		answerLabel.setText(Integer.toString(answer));
+	public void setAnswer(double answer) {
+		answerLabel.setText(Double.toString(answer));
+	}
+
+	// Use the EvaluateString class to compute the calculation
+	public void compute() {
+		EvaluateString es = new EvaluateString();
+		double result = es.evaluate(getInput());
+		setAnswer(result);
 	}
 
 }

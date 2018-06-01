@@ -18,7 +18,7 @@ public class DisplayExample {
 		InputButton button_plus = new InputButton("+", display);
         
         Button equals = new Button("=");
-        equals.setOnAction(e -> display.setAnswer(12556));//when button is pressed, set answer to 12556 (random number...)
+        equals.setOnAction(e -> display.compute());//when button is pressed, set answer to 12556 (random number...)
         
         Main.layout.getChildren().add(display);
         Main.layout.getChildren().addAll(button_1, button_2, button_plus, equals);//add buttons to layout
