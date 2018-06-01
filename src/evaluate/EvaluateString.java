@@ -1,8 +1,11 @@
 package evaluate;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import evaluate.operations.OpSymbol;
 import evaluate.operations.Operations;
 import evaluate.operations.Operation;
+
+import java.util.ArrayList;
 
 /**
  * A class that is responsible for computing the value
@@ -25,7 +28,10 @@ public class EvaluateString implements IEvaluable {
 	 * @return The numerical result
 	 */
 	public double evaluate(String calcString) {
-		return 3.1415;
+		String[] formattedString = formatString(calcString);
+		if (formattedString.length == 0)
+			return 0;
+		return evaluateStringArray(formattedString);
 	}
 
 	/**
@@ -40,9 +46,18 @@ public class EvaluateString implements IEvaluable {
 
 		for (int i = 0; i < calcString.length(); i++) {
 			for (int j = 0; j < opSymbols.length; j++) {
-				if (calcString.charAt(i) == opSymbols[j].symbol.charAt(0)) {
-					// TODO: 01/06/18 Format this string
-
+				char symbol = opSymbols[j].symbol.charAt(0);
+				if (calcString.charAt(i) == symbol) {
+					String[] splitCalcString = calcString.split("[" + symbol + "]");
+					stringArray = new String[splitCalcString.length * 2 - 1];
+					for (int k = 0; k < splitCalcString.length; k++) {
+						if (k == 0)
+							stringArray[k] = splitCalcString[k];
+						else
+							stringArray[k * 2] = splitCalcString[k];
+						if (k < splitCalcString.length - 1)
+							stringArray[k * 2 + 1] = "" + symbol;
+					}
 				}
 			}
 		}
