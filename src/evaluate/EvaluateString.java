@@ -31,8 +31,7 @@ public class EvaluateString implements IEvaluable {
 		ArrayList<String> formattedString = formatString(calcString);
 		if (formattedString.size() == 0)
 			return 0;
-//		return evaluateStringArray(formattedString);
-		return 1;
+		return evaluateStringArray(formattedString);
 	}
 
 	/**
@@ -52,8 +51,11 @@ public class EvaluateString implements IEvaluable {
 				if (calcString.charAt(i) == symbol) {
 					stringArrayList.add(calcString.substring(startIndex, i));
 					stringArrayList.add("" + calcString.charAt(i));
-					startIndex = i;
+					startIndex = i + 1;
 				}
+			}
+			if (i == calcString.length() - 1) {
+				stringArrayList.add(calcString.substring(startIndex, calcString.length()));
 			}
 		}
 
@@ -67,13 +69,13 @@ public class EvaluateString implements IEvaluable {
 	 * @param parts The formatted string array from formatString()
 	 * @return The computed result
 	 */
-	public double evaluateStringArray(String[] parts) {
-		Operation total = new Operation(Double.parseDouble(parts[0]));
+	public double evaluateStringArray(ArrayList<String> parts) {
+		Operation total = new Operation(Double.parseDouble(parts.get(0)));
 
-		for (int i = 1; i < parts.length; i += 2) {
+		for (int i = 1; i < parts.size(); i += 2) {
 			for (int j = 0; j < opSymbols.length; j++) {
-				if (parts[i] == opSymbols[j].symbol) {
-					double number = Double.parseDouble(parts[i + 1]);
+				if (parts.get(i).equals(opSymbols[j].symbol)) {
+					double number = Double.parseDouble(parts.get(i + 1));
 					switch (opSymbols[j].op) {
 						case ADD:
 							total.add(number);

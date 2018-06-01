@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 public class EvaluateStringTest {
 
@@ -30,19 +31,51 @@ public class EvaluateStringTest {
 		compareArray.add("1");
 		compareArray.add("+");
 		compareArray.add("2");
-		Assert.assertTrue(stringArray.equals(compareArray));
+		assertThat(stringArray, is(compareArray));
 	}
 
 	@Test
 	public void formatStringMultipleDigit() {
-//		String[] stringArray = es.formatString("10+20");
-//		Assert.assertArrayEquals(stringArray, new String[]{"10", "+", "20"});
+		ArrayList<String> stringArray = es.formatString("10+20");
+		ArrayList<String> compareArray = new ArrayList<String>();
+		compareArray.add("10");
+		compareArray.add("+");
+		compareArray.add("20");
+		assertThat(stringArray, is(compareArray));
+	}
+
+	@Test
+	public void formatStringMultipleDigit3Args() {
+		ArrayList<String> stringArray = es.formatString("10+20-5");
+		ArrayList<String> compareArray = new ArrayList<String>();
+		compareArray.add("10");
+		compareArray.add("+");
+		compareArray.add("20");
+		compareArray.add("-");
+		compareArray.add("5");
+		assertThat(stringArray, is(compareArray));
 	}
 
 	@Test
 	public void evaluateStringArray() {
-		double total = es.evaluateStringArray(new String[]{"1", "+", "2", "-", "4", "*", "-1"});
-		Assert.assertEquals(total, 1, 0);
+		ArrayList<String> array = new ArrayList<String>();
+		array.add("10");
+		array.add("+");
+		array.add("20");
+		double total = es.evaluateStringArray(array);
+		Assert.assertEquals(total, 30, 0);
+	}
+
+	@Test
+	public void evaluateStringArray2() {
+		ArrayList<String> array = new ArrayList<String>();
+		array.add("1");
+		array.add("+");
+		array.add("4");
+		array.add("+");
+		array.add("5");
+		double total = es.evaluateStringArray(array);
+		Assert.assertEquals(total, 10, 0);
 	}
 
 }
