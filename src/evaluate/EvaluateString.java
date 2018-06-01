@@ -1,9 +1,8 @@
 package evaluate;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import evaluate.operations.OpSymbol;
-import evaluate.operations.Operations;
 import evaluate.operations.Operation;
+import evaluate.operations.Operations;
 
 import java.util.ArrayList;
 
@@ -31,6 +30,13 @@ public class EvaluateString implements IEvaluable {
 	 * @return The numerical result
 	 */
 	public double evaluate(String calcString) {
+		/**
+		 * Remove the brackets in here?
+		 * Find the innermost brackets - while loop w/ index variable
+		 * Evaluate innermost brackets and substitute them in
+		 * Keep going until there's no more brackets
+		 * Go on as usual
+		 */
 		String removeAns = replaceAns(calcString);
 		ArrayList<String> formattedString = formatString(removeAns);
 		if (formattedString.size() == 0)
@@ -77,27 +83,6 @@ public class EvaluateString implements IEvaluable {
 		}
 
 		return stringArrayList;
-	}
-
-	/**
-	 * Formats a string so that the brackets are removed and that
-	 * the terms are placed in order, removing the need for brackets
-	 *
-	 * @param stringWithBrackets The string that contains the brackets
-	 * @return A string that doesn't contain brackets
-	 */
-	public String removeBrackets(String stringWithBrackets) {
-		return "";
-	}
-
-	// TODO: 01/06/18 ALL OF THISSSSSS D:< 
-	
-	public String removeOnePairOfBrackets(String stringWithBrackets) {
-		return "";
-	}
-
-	public String removeMultipleBrackets(String stringWithBrackets) {
-		return "";
 	}
 
 	/**

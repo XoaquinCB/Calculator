@@ -1,8 +1,5 @@
 package display;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import evaluate.EvaluateString;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,6 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Display extends VBox {
 
@@ -23,6 +23,7 @@ public class Display extends VBox {
 	private HBox hBox2;
 	private TextField inputField;
 	private Label answerLabel;
+	private EvaluateString evaluateString;
 
 	// Constructor
 	public Display() {
@@ -65,6 +66,8 @@ public class Display extends VBox {
 		hBox2.getChildren().add(answerLabel);//add inputField to hBox2
 		this.getChildren().add(hBox2);//add hBox1 to VBox
 
+		evaluateString = new EvaluateString();
+
 	}
 
 	// Set font size of intput text
@@ -97,8 +100,7 @@ public class Display extends VBox {
 
 	// Use the EvaluateString class to compute the calculation
 	public void compute() {
-		EvaluateString es = new EvaluateString();
-		double result = es.evaluate(getInput());
+		double result = evaluateString.evaluate(getInput());
 		setAnswer(result);
 	}
 
