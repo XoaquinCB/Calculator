@@ -3,10 +3,12 @@ package display;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -14,7 +16,7 @@ import javafx.scene.text.Font;
 
 public class Display extends VBox {
 	
-	private final ArrayList<Character> validCharacters = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '(', ')'));
+	private final ArrayList<Character> validCharacters = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '(', ')', '.'));
 	
 	private HBox hBox1;
 	private HBox hBox2;
@@ -24,19 +26,32 @@ public class Display extends VBox {
 	// Constructor
 	public Display() {
 		
-		inputField = new TextField();//initialise inputField
+		inputField = new TextField() { public void paste() { } };//initialise inputField, and prevent pasting
 		inputField.setStyle("-fx-background-color: #fff;");//remove border
 		setInputSize(20);//set font size
 		HBox.setHgrow(inputField, Priority.ALWAYS);//always resize to fit container
 		
-		// Add listener to inputField to only allow valid characters
-		inputField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if(!newValue.equals("")) { //make sure inputField isn't empty
-		        if(!validCharacters.contains(newValue.charAt(newValue.length()-1))) { //if the last character entered isn't in validCharacters
-		        	inputField.setText(newValue.substring(0, newValue.length()-1));//remove last character
-		        }
+		// Add listener to inputField to only allow valid characters to be typed
+		 inputField.setOnKeyTyped(new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent event) {
+				char character = event.getCharacter().charAt(0);//get the character which has been typed
+				if(!validCharacters.contains(character)) {//if it's not valid
+					event.consume();//cancel the event
+				}
+				
+				// Removing "Ans"
+				if(inputField.getText().substring(0, inputField.getCaretPosition()).endsWith("An")) {
+					inputField.deletePreviousChar();
+					inputField.deletePreviousChar();
+				} else if(inputField.getText().substring(inputField.getCaretPosition()).startsWith("ns")) {
+					inputField.deleteNextChar();
+					inputField.deleteNextChar();
+				} else if(inputField.getText().substring(0, inputField.getCaretPosition()).endsWith("A") && inputField.getText().substring(inputField.getCaretPosition()).startsWith("s")) {
+					inputField.deleteNextChar();
+					inputField.deletePreviousChar();
+				}
 			}
-	    });
+		 });
 		
 		// Add listener to inputField to stop displaying answer when it gains focus
 		inputField.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -80,7 +95,7 @@ public class Display extends VBox {
 			inputField.setText("");
 			inputField.requestFocus();
 		}
-		inputField.appendText(input);
+		inputField.insertText(inputField.getCaretPosition(), input);//insert the input where the caret is (vertical cursor)
 	}
 	
 	// Get the text from the inputField
@@ -89,8 +104,8 @@ public class Display extends VBox {
 	}
 	
 	// Set the answerLabel to a value
-	public void setAnswer(int answer) {
-		answerLabel.setText(Integer.toString(answer));
+	public void setAnswer(double answer) {
+		answerLabel.setText(Double.toString(answer));
 	}
 
 }
