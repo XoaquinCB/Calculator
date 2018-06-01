@@ -1,36 +1,13 @@
 package evaluate.operations;
 
 /**
- * 1. Create when starting calculation
- * 2. Call methods to perform an operation
- * 3. Call getTotal() when the calculation has finished
+ * The operations that can be performed
  */
-public class Operations implements IOperational {
+public enum Operations {
 
-	private double total;
-
-	public Operations(double startingTotal) {
-		total = startingTotal;
-	}
-
-	public void add(double num) {
-		total += num;
-	}
-
-	public void subtract(double num) {
-		total -= num;
-	}
-
-	public void multiply(double num) {
-		total *= num;
-	}
-
-	public void divide(double num) {
-		total /= num;
-	}
-
-	public double getTotal() {
-		return total;
-	}
+	ADD,
+	SUBTRACT,
+	MULTIPLY,
+	DIVIDE
 
 }
