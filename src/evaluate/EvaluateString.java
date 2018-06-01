@@ -28,10 +28,11 @@ public class EvaluateString implements IEvaluable {
 	 * @return The numerical result
 	 */
 	public double evaluate(String calcString) {
-		String[] formattedString = formatString(calcString);
-		if (formattedString.length == 0)
+		ArrayList<String> formattedString = formatString(calcString);
+		if (formattedString.size() == 0)
 			return 0;
-		return evaluateStringArray(formattedString);
+//		return evaluateStringArray(formattedString);
+		return 1;
 	}
 
 	/**
@@ -41,28 +42,22 @@ public class EvaluateString implements IEvaluable {
 	 * @param calcString The string to format
 	 * @return A formatted string array
 	 */
-	public String[] formatString(String calcString) {
-		String[] stringArray = new String[calcString.length()];
+	public ArrayList<String> formatString(String calcString) {
+		ArrayList<String> stringArrayList = new ArrayList<String>();
+		int startIndex = 0;
 
 		for (int i = 0; i < calcString.length(); i++) {
 			for (int j = 0; j < opSymbols.length; j++) {
 				char symbol = opSymbols[j].symbol.charAt(0);
 				if (calcString.charAt(i) == symbol) {
-					String[] splitCalcString = calcString.split("[" + symbol + "]");
-					stringArray = new String[splitCalcString.length * 2 - 1];
-					for (int k = 0; k < splitCalcString.length; k++) {
-						if (k == 0)
-							stringArray[k] = splitCalcString[k];
-						else
-							stringArray[k * 2] = splitCalcString[k];
-						if (k < splitCalcString.length - 1)
-							stringArray[k * 2 + 1] = "" + symbol;
-					}
+					stringArrayList.add(calcString.substring(startIndex, i));
+					stringArrayList.add("" + calcString.charAt(i));
+					startIndex = i;
 				}
 			}
 		}
 
-		return stringArray;
+		return stringArrayList;
 	}
 
 	/**
