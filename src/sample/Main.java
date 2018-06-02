@@ -1,7 +1,6 @@
 package sample;
 
 import display.Display;
-import display.DisplayExample;
 import input.ButtonPad;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -20,6 +19,9 @@ public class Main extends Application {
 	public static Display display;
 	public static ButtonPad buttonPad;
 	
+	private int height = 425;
+	private int width = 275;
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -33,13 +35,19 @@ public class Main extends Application {
 		layout = new VBox(5);
 		layout.setAlignment(Pos.TOP_CENTER);
 		layout.setPadding(new Insets(15));
-		layout.setPrefWidth(40);
-		layout.setPrefHeight(40);
-
-		DisplayExample.init();
+		layout.setPrefWidth((width-35)/4);
+		layout.setPrefHeight((width-35)/4);
+		
+		// Display
+		display = new Display();
+		layout.getChildren().add(display);
+		
+		// ButtonPad
+		buttonPad = new ButtonPad(display);
+		layout.getChildren().add(buttonPad);
 
 		// Scene & Stage
-		scene = new Scene(layout, 300, 350, Color.WHITE);
+		scene = new Scene(layout, width, height, Color.WHITE);
 		scene.getStylesheets().add("style.css");
 		stage = new Stage();
 		stage.setResizable(false);
