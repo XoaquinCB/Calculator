@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import display.Display;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import sample.Main;
 
 public class ButtonPad extends GridPane{
 	
@@ -23,84 +24,84 @@ public class ButtonPad extends GridPane{
 		// Initialise buttons
 		button_0 = new InputButton("0", display);
 //		HBox.setHgrow(button_0, Priority.ALWAYS);
-		button_0.setMinSize(50, 50);
+		button_0.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_1 = new InputButton("1", display);
 //		HBox.setHgrow(button_1, Priority.ALWAYS);
-		button_1.setMinSize(50, 50);
+		button_1.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_2 = new InputButton("2", display);
 //		HBox.setHgrow(button_2, Priority.ALWAYS);
-		button_2.setMinSize(50, 50);
+		button_2.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_3 = new InputButton("3", display);
 //		HBox.setHgrow(button_3, Priority.ALWAYS);
-		button_3.setMinSize(50, 50);
+		button_3.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_4 = new InputButton("4", display);
 //		HBox.setHgrow(button_4, Priority.ALWAYS);
-		button_4.setMinSize(50, 50);
+		button_4.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_5 = new InputButton("5", display);
 //		HBox.setHgrow(button_4, Priority.ALWAYS);
-		button_5.setMinSize(50, 50);
+		button_5.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_6 = new InputButton("6", display);
 //		HBox.setHgrow(button_6, Priority.ALWAYS);
-		button_6.setMinSize(50, 50);
+		button_6.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_7 = new InputButton("7", display);
 //		HBox.setHgrow(button_7, Priority.ALWAYS);
-		button_7.setMinSize(50, 50);
+		button_7.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_8 = new InputButton("8", display);
 //		HBox.setHgrow(button_8, Priority.ALWAYS);
-		button_8.setMinSize(50, 50);
+		button_8.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_9 = new InputButton("9", display);
 //		HBox.setHgrow(button_9, Priority.ALWAYS);
-		button_9.setMinSize(50, 50);
+		button_9.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_plus = new InputButton("+", display);
 //		HBox.setHgrow(button_plus, Priority.ALWAYS);
-		button_plus.setMinSize(50, 50);
+		button_plus.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_minus = new InputButton("-", display);
 //		HBox.setHgrow(button_minus, Priority.ALWAYS);
-		button_minus.setMinSize(50, 50);
+		button_minus.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_multiply = new InputButton("*", display);
 //		HBox.setHgrow(button_multiply, Priority.ALWAYS);
-		button_multiply.setMinSize(50, 50);
+		button_multiply.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_divide = new InputButton("/", display);
 //		HBox.setHgrow(button_divide, Priority.ALWAYS);
-		button_divide.setMinSize(50, 50);
+		button_divide.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_leftBracket = new InputButton("(", display);
 //		HBox.setHgrow(button_leftBracket, Priority.ALWAYS);
-		button_leftBracket.setMinSize(50, 50);
+		button_leftBracket.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_rightBracket = new InputButton(")", display);
 //		HBox.setHgrow(button_rightBracket, Priority.ALWAYS);
-		button_rightBracket.setMinSize(50, 50);
+		button_rightBracket.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_decimal = new InputButton(".", display);
 //		HBox.setHgrow(button_decimal, Priority.ALWAYS);
-		button_decimal.setMinSize(50, 50);
+		button_decimal.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_ans = new InputButton("Ans", display);
 //		HBox.setHgrow(button_ans, Priority.ALWAYS);
-		button_ans.setMinSize(50, 50);
+		button_ans.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		
 		button_equals = new Button("=");
 //		HBox.setHgrow(button_equals, Priority.ALWAYS);
-		button_equals.setMinSize(50, 50);
-		button_equals.setOnAction(e -> display.setAnswer(12556));
+		button_equals.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
+		button_equals.setOnAction(e -> display.compute());//when button is pressed, compute answer using Jake's amazing interpreter
 		
 		button_del = new Button("DEL");
 //		HBox.setHgrow(button_del, Priority.ALWAYS);
-		button_del.setMinSize(50, 50);
+		button_del.setMinSize(Main.layout.getPrefWidth(), Main.layout.getPrefHeight());
 		button_del.setOnAction(e -> display.backspace());
 		button_del.setFocusTraversable(false);
 		
