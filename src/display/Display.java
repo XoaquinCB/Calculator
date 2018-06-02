@@ -36,11 +36,11 @@ public class Display extends VBox {
 	public Display() {
 		
 		inputField = new TextField() { public void paste() { } };//initialise inputField, and prevent pasting
-		inputField.setStyle("-fx-background-color: #fff;");//remove border
+		inputField.setStyle("-fx-background-color: #fff; -fx-text-fill: #005c7f;");//remove border and set text colour
 		setInputSize(18);//set font size
 		HBox.setHgrow(inputField, Priority.ALWAYS);//always resize to fit container
 		
-		this.setStyle("-fx-border-color: #999;");//set a border for the display
+		this.setStyle("-fx-border-color: #009edb; -fx-border-width: 2px;");//set a border for the display
 		
 		// Add listener to inputField to only allow valid characters to be typed
 		 inputField.setOnKeyTyped(new EventHandler<KeyEvent>() {
@@ -91,6 +91,7 @@ public class Display extends VBox {
 		});
 
 		answerLabel = new Label("Answer");//initialise answerLabel
+		answerLabel.setStyle("-fx-text-fill: #005c7f;");//set the text colour
 		setAnswerSize(20);//set font size
 		HBox.setHgrow(answerLabel, Priority.ALWAYS);//always resize to fit its container
 

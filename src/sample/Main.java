@@ -19,7 +19,7 @@ public class Main extends Application {
 	public static Display display;
 	public static ButtonPad buttonPad;
 	
-	private int height = 425;
+	private int height = 415;
 	private int width = 275;
 	
 	public static void main(String[] args) {
@@ -32,7 +32,7 @@ public class Main extends Application {
 		stage = primaryStage;
 
 		// Layout
-		layout = new VBox(5);
+		layout = new VBox(10);
 		layout.setAlignment(Pos.TOP_CENTER);
 		layout.setPadding(new Insets(15));
 		layout.setPrefWidth((width-35)/4);
