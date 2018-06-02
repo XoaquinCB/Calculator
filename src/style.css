@@ -1,13 +1,12 @@
 .button {
-    -fx-background-color: #6d8ca0;
-    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-family: "Calibri";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#46aace, #1f789b);
     -fx-background-radius: 0, 0, 0;
-    -fx-text-fill: #fff;
 }
 
-.text-field {
-    -fx-border-color: #999;
-    -fx-background-color: #fff;
-    -fx-background-radius: 0, 0, 0;
-    -fx-text-fill: #000;
+.button:hover {
+    -fx-background-color: linear-gradient(#419dbf, #175b75);
 }
