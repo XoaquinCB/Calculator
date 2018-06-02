@@ -2,6 +2,7 @@
 *.jar
 *.class
 *.css
+!src/style.css
 
 # IntelliJ
 *.iml
