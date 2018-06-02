@@ -15,14 +15,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class Display extends VBox {
-	
-	private final ArrayList<Character> validCharacters = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '(', ')', '.'));
-	
+
+	private final ArrayList<Character> validCharacters = new ArrayList<Character>(Arrays.asList(
+		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '(', ')', '.'
+	));
+  
 	private HBox hBox1;
 	private HBox hBox2;
 	private TextField inputField;
 	private Label answerLabel;
-	
+
 	// Constructor
 	public Display() {
 		
@@ -52,60 +54,72 @@ public class Display extends VBox {
 				}
 			}
 		 });
-		
+
 		// Add listener to inputField to stop displaying answer when it gains focus
 		inputField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-			if(newValue) { //if inputField gains focus
+			if (newValue) { //if inputField gains focus
 				answerLabel.setText("");//remove answer
 			}
-	    });
-		
+		});
+
 		answerLabel = new Label("Answer");//initialise answerLabel
 		setAnswerSize(30);//set font size
 		HBox.setHgrow(answerLabel, Priority.ALWAYS);//always resize to fit its container
-		
-		
+
+
 		// Arrange objects
 		hBox1 = new HBox();//initialise hBox1
 		hBox1.setPadding(new Insets(0, 10, 0, 10));//set padding
 		hBox1.setAlignment(Pos.BASELINE_LEFT);//set the alignment of inputField to the left
 		hBox1.getChildren().add(inputField);//add inputField to hBox1
 		this.getChildren().add(hBox1);//add hBox1 to VBox
-		
+
 		hBox2 = new HBox();//initialise hBox2
-	    hBox2.setPadding(new Insets(0, 10, 0, 0));//set padding
-	    hBox2.setAlignment(Pos.BASELINE_RIGHT);//set the alignment of inputField to the right
-	    hBox2.getChildren().add(answerLabel);//add inputField to hBox2
-	    this.getChildren().add(hBox2);//add hBox1 to VBox
-	    
+		hBox2.setPadding(new Insets(0, 10, 0, 0));//set padding
+		hBox2.setAlignment(Pos.BASELINE_RIGHT);//set the alignment of inputField to the right
+		hBox2.getChildren().add(answerLabel);//add inputField to hBox2
+		this.getChildren().add(hBox2);//add hBox1 to VBox
+    
 	}
-	
+
 	// Set font size of intput text
 	public void setInputSize(int size) {
 		inputField.setFont(new Font("Monospace", size));
 	}
-	
+
 	// Set font size of answer text
 	public void setAnswerSize(int size) {
 		answerLabel.setFont(new Font("Calibri", size));
 	}
-	
+  
+  // Add text to inputField
 	public void addToInput(String input) {
-		if(!inputField.isFocused()) {
+		if (!inputField.isFocused()) {
 			inputField.setText("");
 			inputField.requestFocus();
 		}
 		inputField.insertText(inputField.getCaretPosition(), input);//insert the input where the caret is (vertical cursor)
 	}
-	
+  
+  // Maunually perform a backspace
+  public void backspace() {
+		inputField.deletePreviousChar();
+	}
+
 	// Get the text from the inputField
 	public String getInput() {
 		return inputField.getText();
 	}
-	
+
 	// Set the answerLabel to a value
 	public void setAnswer(double answer) {
 		answerLabel.setText(Double.toString(answer));
+	}
+
+	// Use the EvaluateString class to compute the calculation
+	public void compute() {
+		double result = evaluateString.evaluate(getInput());
+		setAnswer(result);
 	}
 
 }
