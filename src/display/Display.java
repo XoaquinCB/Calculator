@@ -90,12 +90,18 @@ public class Display extends VBox {
 		answerLabel.setFont(new Font("Calibri", size));
 	}
 	
+	// Add text to inputField
 	public void addToInput(String input) {
 		if(!inputField.isFocused()) {
 			inputField.setText("");
 			inputField.requestFocus();
 		}
 		inputField.insertText(inputField.getCaretPosition(), input);//insert the input where the caret is (vertical cursor)
+	}
+	
+	// Maunually perform a backspace
+	public void backspace() {
+		inputField.deletePreviousChar();
 	}
 	
 	// Get the text from the inputField
