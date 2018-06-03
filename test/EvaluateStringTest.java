@@ -1,7 +1,6 @@
-package evaluate;
-
 import org.junit.Assert;
 import org.junit.Test;
+import evaluate.EvaluateString;
 
 import java.util.ArrayList;
 
@@ -44,6 +43,36 @@ public class EvaluateStringTest {
 		String ansString = es.replaceAns("Ans+1.25");
 		double result = es.evaluate(ansString);
 		Assert.assertEquals(result, 4.75, 0);
+	}
+
+	@Test
+	public void addAsteriskSingleInt() {
+		String string = es.addAsterisk("5(1+2)");
+		Assert.assertEquals(string, "5*(1+2)");
+	}
+
+	@Test
+	public void addAsteriskMultipleInt() {
+		String string = es.addAsterisk("5(1+2)+6(5-2)");
+		Assert.assertEquals(string, "5*(1+2)+6*(5-2)");
+	}
+
+	@Test
+	public void addAsteriskSingleDouble() {
+		String string = es.addAsterisk("5.1(1.1+2.1)");
+		Assert.assertEquals(string, "5.1*(1.1+2.1)");
+	}
+
+	@Test
+	public void addAsteriskMultipleDouble() {
+		String string = es.addAsterisk("5.1(1.1+2.1)+6.1(5.1-2.1)");
+		Assert.assertEquals(string, "5.1*(1.1+2.1)+6.1*(5.1-2.1)");
+	}
+
+	@Test
+	public void addAsteriskNone() {
+		String string = es.addAsterisk("5+3/2*1-2");
+		Assert.assertEquals(string, "5+3/2*1-2");
 	}
 
 	@Test

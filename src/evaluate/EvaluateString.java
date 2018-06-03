@@ -37,7 +37,8 @@ public class EvaluateString implements IEvaluable {
 		 * Keep going until there's no more brackets
 		 * Go on as usual
 		 */
-		String removeAns = replaceAns(calcString);
+		String withAsterisks = addAsterisk(calcString);
+		String removeAns = replaceAns(withAsterisks);
 		ArrayList<String> formattedString = formatString(removeAns);
 		if (formattedString.size() == 0)
 			return 0;
@@ -55,6 +56,33 @@ public class EvaluateString implements IEvaluable {
 	 */
 	public String replaceAns(String string) {
 		return string.replace("Ans", "" + ans);
+	}
+
+	/**
+	 * Takes a string and adds an asterisk if needed
+	 * eg. 5(2+3) -> 5*(2+3)
+	 *
+	 * @param string The string without any asterisks
+	 * @return A string containing asterisks in the correct places
+	 */
+	public String addAsterisk(String string) {
+		String newString = "";
+		boolean added = false;
+		int index = 0;
+
+		for (int i = 0; i < string.length() - 1; i++) {
+			if (string.charAt(i) != '*' && string.charAt(i + 1) == '(') {
+				newString += string.substring(index, i + 1) + "*";
+				index = i + 1;
+				added = true;
+			}
+			if (i == string.length() - 2)
+				newString += string.substring(index);
+		}
+
+		if (!added)
+			return string;
+		return newString;
 	}
 
 	/**
