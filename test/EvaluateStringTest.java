@@ -33,16 +33,14 @@ public class EvaluateStringTest {
 	public void replaceAnsInt() {
 		es.evaluate("1+2");
 		String ansString = es.replaceAns("Ans+2");
-		double result = es.evaluate(ansString);
-		Assert.assertEquals(result, 5, 0);
+		Assert.assertEquals(ansString, "(3.0)+2");
 	}
 
 	@Test
 	public void replaceAnsDecimal() {
 		es.evaluate("1.5+2");
 		String ansString = es.replaceAns("Ans+1.25");
-		double result = es.evaluate(ansString);
-		Assert.assertEquals(result, 4.75, 0);
+		Assert.assertEquals(ansString, "(3.5)+1.25");
 	}
 
 	@Test
@@ -73,6 +71,14 @@ public class EvaluateStringTest {
 	public void addAsteriskNone() {
 		String string = es.addAsterisk("5+3/2*1-2");
 		Assert.assertEquals(string, "5+3/2*1-2");
+	}
+
+	@Test
+	public void replaceAnsAndAddAsterisk() {
+		es.evaluate("1+3");
+		String replacedAns = es.replaceAns("5Ans+4");
+		String addedAsterisk = es.addAsterisk(replacedAns);
+		Assert.assertEquals(addedAsterisk, "5*(4.0)+4");
 	}
 
 	@Test

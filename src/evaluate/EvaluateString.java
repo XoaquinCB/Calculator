@@ -55,7 +55,7 @@ public class EvaluateString implements IEvaluable {
 	 * @return A string with a numerical value instead of "Ans"
 	 */
 	public String replaceAns(String string) {
-		return string.replace("Ans", "" + ans);
+		return string.replace("Ans", "(" + ans + ")");
 	}
 
 	/**
