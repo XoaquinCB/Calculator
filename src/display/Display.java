@@ -1,8 +1,5 @@
 package display;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import evaluate.EvaluateString;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,16 +13,19 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Display extends VBox {
 
 	private final ArrayList<Character> validCharacters = new ArrayList<Character>(Arrays.asList(
 		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '(', ')', '.'
 	));
-	
+
 	private final ArrayList<String> validStrings = new ArrayList<String>(Arrays.asList(
 		"Ans"
 	));
-  
+
 	private HBox hBox1;
 	private HBox hBox2;
 	private TextField inputField;
@@ -34,57 +34,60 @@ public class Display extends VBox {
 
 	// Constructor
 	public Display() {
-		
-		inputField = new TextField() { public void paste() { } };//initialise inputField, and prevent pasting
+
+		inputField = new TextField() {
+			public void paste() {
+			}
+		};//initialise inputField, and prevent pasting
 		inputField.setStyle("-fx-background-color: #fff; -fx-text-fill: #005c7f;");//remove border and set text colour
 		setInputSize(18);//set font size
 		HBox.setHgrow(inputField, Priority.ALWAYS);//always resize to fit container
-		
+
 		this.setStyle("-fx-border-color: #009edb; -fx-border-width: 2px;");//set a border for the display
-		
+
 		// Add listener to inputField to only allow valid characters to be typed
-		 inputField.setOnKeyTyped(new EventHandler<KeyEvent>() {
+		inputField.setOnKeyTyped(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event) {
 				char character = event.getCharacter().charAt(0);//get the character which has been typed
-				if(!validCharacters.contains(character)) {//if it's not valid
+				if (!validCharacters.contains(character)) {//if it's not valid
 					event.consume();//cancel the event
 				}
-				
+
 				// Remove all of a validString when one of its characters is removed
-				for(String current : validStrings) {
-					for(int i = 0; i < current.length(); i ++) {
-						if(inputField.getText().substring(0, inputField.getCaretPosition()).endsWith(current.substring(0, i)) && 
-								inputField.getText().substring(inputField.getCaretPosition()).startsWith(current.substring(i+1))) {
-							for(int j = 0; j < current.substring(0, i).length(); j ++) {
+				for (String current : validStrings) {
+					for (int i = 0; i < current.length(); i++) {
+						if (inputField.getText().substring(0, inputField.getCaretPosition()).endsWith(current.substring(0, i)) &&
+							inputField.getText().substring(inputField.getCaretPosition()).startsWith(current.substring(i + 1))) {
+							for (int j = 0; j < current.substring(0, i).length(); j++) {
 								inputField.deletePreviousChar();
 							}
-							for(int j = 0; j < current.substring(i).length(); j ++) {
+							for (int j = 0; j < current.substring(i).length(); j++) {
 								inputField.deleteNextChar();
 							}
 						}
 					}
 				}
-				
+
 			}
-		 });
-		 
-		 // Add listener to show answer when ENTER is pressed
-		 inputField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		});
+
+		// Add listener to show answer when ENTER is pressed
+		inputField.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event) {
-				if (event.getCode() == KeyCode.ENTER){//if ENTER key if pressed
+				if (event.getCode() == KeyCode.ENTER) {//if ENTER key if pressed
 					compute();//compute answer
 					answerLabel.requestFocus();//remove focus from inputField (give focus to answerLabel)
 				}
 			}
-		 });
+		});
 
 		// Add listener to inputField to stop displaying answer when it gains focus
 		inputField.focusedProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue) { //if inputField gains focus
 				answerLabel.setText("");//remove answer
-				
+
 				String inputText = inputField.getText();
-				if(inputText.startsWith("+")||inputText.startsWith("-")||inputText.startsWith("*")||inputText.startsWith("/")) {
+				if (inputText.startsWith("+") || inputText.startsWith("-") || inputText.startsWith("*") || inputText.startsWith("/")) {
 					inputField.setText("Ans" + inputText);
 				}
 			}
@@ -108,9 +111,9 @@ public class Display extends VBox {
 		hBox2.setAlignment(Pos.BASELINE_RIGHT);//set the alignment of inputField to the right
 		hBox2.getChildren().add(answerLabel);//add inputField to hBox2
 		this.getChildren().add(hBox2);//add hBox1 to VBox
-		
+
 		evaluateString = new EvaluateString();
-    
+
 	}
 
 	// Set font size of intput text
@@ -122,21 +125,21 @@ public class Display extends VBox {
 	public void setAnswerSize(int size) {
 		answerLabel.setFont(new Font("Calibri", size));
 	}
-	
-  // Add text to inputField
+
+	// Add text to inputField
 	public void addToInput(String input) {
 		if (!inputField.isFocused()) {
 			inputField.setText("");
 			inputField.requestFocus();
-			
+
 			// Add "Ans" if string starts with an operation
-			if(input == "+" || input == "-" || input == "*" || input == "/") {
+			if (input == "+" || input == "-" || input == "*" || input == "/") {
 				input = "Ans" + input;
 			}
 		}
 		inputField.insertText(inputField.getCaretPosition(), input);//insert the input where the caret is (vertical cursor)
 	}
-	
+
 	// Maunually perform a backspace
 	public void backspace() {
 		inputField.deletePreviousChar();
@@ -148,13 +151,13 @@ public class Display extends VBox {
 	}
 
 	// Set the answerLabel to a value
-	public void setAnswer(double answer) {
-		answerLabel.setText(Double.toString(answer));
+	public void setAnswer(String answer) {
+		answerLabel.setText(answer);
 	}
 
 	// Use the EvaluateString class to compute the calculation
 	public void compute() {
-		double result = evaluateString.evaluate(getInput());
+		String result = evaluateString.evaluate(getInput());
 		setAnswer(result);
 	}
 

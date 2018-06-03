@@ -29,21 +29,19 @@ public class EvaluateString implements IEvaluable {
 	 * @param calcString The string to evaluate
 	 * @return The numerical result
 	 */
-	public double evaluate(String calcString) {
-		/**
-		 * Remove the brackets in here?
-		 * Find the innermost brackets - while loop w/ index variable
-		 * Evaluate innermost brackets and substitute them in
-		 * Keep going until there's no more brackets
-		 * Go on as usual
-		 */
-		String removeAns = replaceAns(calcString);
-		ArrayList<String> formattedString = formatString(removeAns);
-		if (formattedString.size() == 0)
-			return 0;
-		double result = evaluateStringArray(formattedString);
-		ans = result;
-		return result;
+	public String evaluate(String calcString) {
+		try {
+			String withAsterisks = addAsterisk(calcString);
+			String removeAns = replaceAns(withAsterisks);
+			ArrayList<String> formattedString = formatString(removeAns);
+			if (formattedString.size() == 0)
+				return "Error";
+			double result = evaluateStringArray(formattedString);
+			ans = result;
+			return Double.toString(result);
+		} catch (Exception e) {
+			return "Error";
+		}
 	}
 
 	/**
@@ -54,7 +52,34 @@ public class EvaluateString implements IEvaluable {
 	 * @return A string with a numerical value instead of "Ans"
 	 */
 	public String replaceAns(String string) {
-		return string.replace("Ans", "" + ans);
+		return string.replace("Ans", "(" + ans + ")");
+	}
+
+	/**
+	 * Takes a string and adds an asterisk if needed
+	 * eg. 5(2+3) -> 5*(2+3)
+	 *
+	 * @param string The string without any asterisks
+	 * @return A string containing asterisks in the correct places
+	 */
+	public String addAsterisk(String string) {
+		String newString = "";
+		boolean added = false;
+		int index = 0;
+
+		for (int i = 0; i < string.length() - 1; i++) {
+			if (string.charAt(i) != '*' && string.charAt(i + 1) == '(') {
+				newString += string.substring(index, i + 1) + "*";
+				index = i + 1;
+				added = true;
+			}
+			if (i == string.length() - 2)
+				newString += string.substring(index);
+		}
+
+		if (!added)
+			return string;
+		return newString;
 	}
 
 	/**

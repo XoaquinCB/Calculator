@@ -16,7 +16,7 @@ public class DisplayExample {
 		InputButton button_1 = new InputButton("1", display);
 		InputButton button_2 = new InputButton("2", display);
 		InputButton button_plus = new InputButton("Ans", display);
-        
+
 		// Equals button
 		Button equals = new Button("=");
 		equals.setOnAction(e -> display.compute());//when button is pressed, compute answer using Jake's amazing interpreter
