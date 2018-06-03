@@ -30,13 +30,6 @@ public class EvaluateString implements IEvaluable {
 	 * @return The numerical result
 	 */
 	public String evaluate(String calcString) {
-		/**
-		 * Remove the brackets in here?
-		 * Find the innermost brackets - while loop w/ index variable
-		 * Evaluate innermost brackets and substitute them in
-		 * Keep going until there's no more brackets
-		 * Go on as usual
-		 */
 		try {
 			String withAsterisks = addAsterisk(calcString);
 			String removeAns = replaceAns(withAsterisks);
