@@ -1,6 +1,6 @@
+import evaluate.operations.Operation;
 import org.junit.Assert;
 import org.junit.Test;
-import evaluate.operations.Operation;
 
 public class OperationTest {
 

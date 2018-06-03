@@ -1,11 +1,11 @@
+import evaluate.EvaluateString;
 import org.junit.Assert;
 import org.junit.Test;
-import evaluate.EvaluateString;
 
 import java.util.ArrayList;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class EvaluateStringTest {
 
@@ -13,20 +13,20 @@ public class EvaluateStringTest {
 
 	@Test
 	public void evaluate() {
-		double stringArray = es.evaluate("1+4-3*5");
-		Assert.assertEquals(stringArray, 10, 0);
+		String stringArray = es.evaluate("1+4-3*5");
+		Assert.assertEquals(stringArray, "10.0");
 	}
 
 	@Test
 	public void evaluateSameSymbol() {
-		double stringArray = es.evaluate("1+4+5");
-		Assert.assertEquals(stringArray, 10, 0);
+		String stringArray = es.evaluate("1+4+5");
+		Assert.assertEquals(stringArray, "10.0");
 	}
 
 	@Test
 	public void evaluateDecimal() {
-		double stringArray = es.evaluate("1.5*2");
-		Assert.assertEquals(stringArray, 3, 0);
+		String stringArray = es.evaluate("1.5*2");
+		Assert.assertEquals(stringArray, "3.0");
 	}
 
 	@Test

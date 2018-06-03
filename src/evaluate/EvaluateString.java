@@ -29,7 +29,7 @@ public class EvaluateString implements IEvaluable {
 	 * @param calcString The string to evaluate
 	 * @return The numerical result
 	 */
-	public double evaluate(String calcString) {
+	public String evaluate(String calcString) {
 		/**
 		 * Remove the brackets in here?
 		 * Find the innermost brackets - while loop w/ index variable
@@ -37,14 +37,18 @@ public class EvaluateString implements IEvaluable {
 		 * Keep going until there's no more brackets
 		 * Go on as usual
 		 */
-		String withAsterisks = addAsterisk(calcString);
-		String removeAns = replaceAns(withAsterisks);
-		ArrayList<String> formattedString = formatString(removeAns);
-		if (formattedString.size() == 0)
-			return 0;
-		double result = evaluateStringArray(formattedString);
-		ans = result;
-		return result;
+		try {
+			String withAsterisks = addAsterisk(calcString);
+			String removeAns = replaceAns(withAsterisks);
+			ArrayList<String> formattedString = formatString(removeAns);
+			if (formattedString.size() == 0)
+				return "Error";
+			double result = evaluateStringArray(formattedString);
+			ans = result;
+			return Double.toString(result);
+		} catch (Exception e) {
+			return "Error";
+		}
 	}
 
 	/**

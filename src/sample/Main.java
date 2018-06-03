@@ -11,21 +11,21 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	
+
 	public static Stage stage;
 	public static Scene scene;
 	public static VBox layout;
-	
+
 	public static Display display;
 	public static ButtonPad buttonPad;
-	
+
 	private int height = 415;
 	private int width = 275;
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) {
 		// Store the primaryStage in a private variable
@@ -35,13 +35,13 @@ public class Main extends Application {
 		layout = new VBox(10);
 		layout.setAlignment(Pos.TOP_CENTER);
 		layout.setPadding(new Insets(15));
-		layout.setPrefWidth((width-35)/4);
-		layout.setPrefHeight((width-35)/4);
-		
+		layout.setPrefWidth((width - 35) / 4);
+		layout.setPrefHeight((width - 35) / 4);
+
 		// Display
 		display = new Display();
 		layout.getChildren().add(display);
-		
+
 		// ButtonPad
 		buttonPad = new ButtonPad(display);
 		layout.getChildren().add(buttonPad);
